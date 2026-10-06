@@ -1,0 +1,72 @@
+# .NET build output
+**/[Bb]in/
+**/[Oo]bj/
+**/[Ll]og/
+**/[Ll]ogs/
+[Aa]rtifacts/
+[Tt]est[Rr]esult*/
+coverage/
+coverage.*
+*.coverage
+*.coveragexml
+
+# IDE and editor files
+.vs/
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.rsuser
+*.DotSettings.user
+*.code-workspace
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+appsettings*.json
+!appsettings*.example.json
+!appsettings*.sample.json
+!appsettings*.template.json
+**/Properties/launchSettings.json
+secrets.json
+*.secrets.json
+docker-compose.override.yml
+docker-compose.override.yaml
+
+# Keys, certificates, and local databases
+*.key
+*.pem
+*.pfx
+*.p12
+*.snk
+*.sqlite
+*.sqlite3
+*.db
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*~
+
+# Package output
+*.nupkg
+*.snupkg
+packages/
+!**/packages/build/
+
+# Operating system files
+.DS_Store
+._*
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+

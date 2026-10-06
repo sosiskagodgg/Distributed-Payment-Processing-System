@@ -1,0 +1,5 @@
+<Solution>
+  <Folder Name="/Transfer/">
+    <Project Path="Transfer/Transfer.Domain/Transfer.Domain.csproj" />
+  </Folder>
+</Solution>
