@@ -70,6 +70,8 @@ public sealed class Transfer : AggregateRoot<TransferId>
         if (!requiresFailureReason && failureReason is not null)
             throw new DomainException(
                 "Причина ошибки допустима только для ошибочного или отклонённого перевода.");
+        if (failureReason is not null && failureReason.Length > 500)
+            throw new DomainException("Длина текста ошибки не мошет привышать 500 символов");
 
         SenderAccountId = senderAccountId;
         RecipientAccountId = recipientAccountId;
@@ -157,6 +159,9 @@ public sealed class Transfer : AggregateRoot<TransferId>
     {
         if (Status is not (TransferStatus.Processing or TransferStatus.FundsReserved))
             throw new DomainException("Завершить перевод с ошибкой можно только во время обработки или после резервирования средств.");
+        if (reason.Length > 500)
+            throw new DomainException("Длина текста ошибки не мошет привышать 500 символов");
+
 
         SetStatus(TransferStatus.Failed, occurredAt, ValidateReason(reason));
     }
