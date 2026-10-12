@@ -4,6 +4,7 @@ using Microsoft.Extensions.Options;
 using Transfer.Domain.Transfers;
 using Transfer.Infrastructure.Common;
 using Transfer.Infrastructure.Persistence;
+using Transfer.Infrastructure.Persistence.Repositories;
 namespace Transfer.Infrastructure;
 
 public static class DependencyInjection
@@ -16,6 +17,8 @@ public static class DependencyInjection
         services.AddDbContext<TransferDbContext>(options=>options.UseNpgsql(connectionString));
 
 
+        services.AddScoped<ITransferRepository, TransferRepository>();
+        services.AddSingleton(TimeProvider.System);
 
         return services;
 

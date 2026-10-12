@@ -8,8 +8,6 @@ public sealed class TransferDbContext : DbContext
     public TransferDbContext(
         DbContextOptions<TransferDbContext> options): base(options) { }
 
-
-    public DbSet<EntityType> Entities => Set<EntityType>();
     public DbSet<TransferEntity> Transfers => Set<TransferEntity>();
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

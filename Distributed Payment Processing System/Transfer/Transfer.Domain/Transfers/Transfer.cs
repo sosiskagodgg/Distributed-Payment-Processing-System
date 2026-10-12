@@ -181,6 +181,11 @@ public sealed class Transfer : AggregateRoot<TransferId>
 
         SetStatus(TransferStatus.Cancelled, occurredAt);
     }
+    public void UpdateVersion(DateTimeOffset occurredAt)
+    {
+        Version++;
+        UpdatedAt = occurredAt;
+    }
 
     private void SetStatus(
         TransferStatus status,
