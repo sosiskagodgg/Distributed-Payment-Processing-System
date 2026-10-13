@@ -19,6 +19,7 @@ public static class DependencyInjection
 
         services.AddScoped<ITransferRepository, TransferRepository>();
         services.AddSingleton(TimeProvider.System);
+        services.AddDbContext<TransferDbContext>();
 
         return services;
 

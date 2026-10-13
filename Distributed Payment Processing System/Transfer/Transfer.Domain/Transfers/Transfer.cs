@@ -183,6 +183,7 @@ public sealed class Transfer : AggregateRoot<TransferId>
     }
     public void UpdateVersion(DateTimeOffset occurredAt)
     {
+        if (occurredAt < UpdatedAt) throw new DomainException("Текущее время обновления не может быть меньше времяни предыдущего обновления");
         Version++;
         UpdatedAt = occurredAt;
     }
