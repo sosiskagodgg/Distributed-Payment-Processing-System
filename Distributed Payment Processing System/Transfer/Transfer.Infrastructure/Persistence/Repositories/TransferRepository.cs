@@ -1,6 +1,8 @@
 ﻿using Transfer.Domain.Transfers;
 using Microsoft.EntityFrameworkCore;
 using Transfer.Infrastructure.Common;
+using Transfer.Application.Abstractions.Persistence;
+using Npgsql;
 namespace Transfer.Infrastructure.Persistence.Repositories;
 
 public class TransferRepository : ITransferRepository
@@ -13,10 +15,33 @@ public class TransferRepository : ITransferRepository
         _timeProvider = timeProvider;
     }
 
-    public async Task AddAsync(Domain.Transfers.Transfer transfer, CancellationToken cancellationToken = default)
+    public async Task<AddTransferResult> CreateOrGetAsync(Domain.Transfers.Transfer transfer, CancellationToken cancellationToken = default)
     {
-        _dbContext.Transfers.Add(transfer);
-        await _dbContext.SaveChangesAsync(cancellationToken);
+        try
+        {
+            _dbContext.Transfers.Add(transfer);
+            await _dbContext.SaveChangesAsync(cancellationToken);
+        }
+        catch (DbUpdateException ex)
+            when (ex.InnerException is PostgresException pg &&
+            pg.SqlState == PostgresErrorCodes.UniqueViolation &&
+            pg.ConstraintName == "UX_Transfers_Sender_IdempotencyKey")
+        {
+            _dbContext.Entry(transfer).State = EntityState.Detached;
+
+            var existing = await GetByIdempotencyKeyAsync(
+                transfer.SenderAccountId,
+                transfer.IdempotencyKey,
+                cancellationToken);
+            
+            if(existing == null) throw new InfrastructureException("Конфликт идемпотентности, но перевод не найден", ex);
+
+            return new AddTransferResult(existing,false);
+        } 
+
+        
+        
+        return new AddTransferResult(transfer, true);
     }
 
     public async Task<bool> AnyAsync(TransferId transferId, CancellationToken cancellationToken = default)

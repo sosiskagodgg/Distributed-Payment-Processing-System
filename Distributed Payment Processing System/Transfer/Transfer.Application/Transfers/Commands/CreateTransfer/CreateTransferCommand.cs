@@ -1,14 +1,15 @@
 ﻿using MediatR;
-using System.Windows.Input;
+using Transfer.Application.Common;
+using Transfer.Domain.Transfers;
 
 namespace Transfer.Application.Transfers.Commands.CreateTransfer;
 
 public record class CreateTransferCommand(
-    Guid senderAccountId,
-    Guid recipientAccountId,
-    Guid idempotencyKey,
-    decimal amount,
-    string currency
-    ) : IRequest<Guid>;
+    Guid SenderAccountId,
+    Guid RecipientAccountId,
+    Guid IdempotencyKey,
+    decimal Amount,
+    string Currency
+    ) : IRequest<Result<TransferId>>;
 
 

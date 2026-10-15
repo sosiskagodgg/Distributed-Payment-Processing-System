@@ -19,7 +19,7 @@ public class TransferConfiguration : IEntityTypeConfiguration<TransferAggregate>
         {
             t.SenderAccountId,
             t.IdempotencyKey
-        }).IsUnique();
+        }).IsUnique().HasDatabaseName("UX_Transfers_Sender_IdempotencyKey");
         
         builder.Property(t => t.Id)
             .HasConversion(

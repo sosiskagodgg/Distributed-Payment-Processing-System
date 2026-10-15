@@ -1,3 +1,4 @@
+
 namespace Transfer.Infrastructure.Common
 {
     public class InfrastructureException : Exception
