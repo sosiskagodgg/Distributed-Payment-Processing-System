@@ -8,6 +8,6 @@ using Transfer.Domain.Transfers;
 
 namespace Transfer.Application.Transfers.Queries.GetTransferById;
 
-public sealed record GetTransferByIdQuery(TransferId Id) : IRequest<Result<TransferDto>>;
+public sealed record GetTransferByIdQuery(Guid Id) : IRequest<Result<TransferDto>>;
 
 

@@ -34,18 +34,18 @@ namespace Transfer.Application.Transfers.Commands.CreateTransfer
             }
             catch (DomainException ex)
             {
-                return Result<TransferId>.Fail(ex.Message);
+                return Result<TransferId>.Fail(ErrorType.Validation, ex.Message);
             }
 
 
 
-             AddTransferResult result = await _transferRepository.CreateOrGetAsync(transfer, cancellationToken);
+             CreateOrGetTransferResult result = await _transferRepository.CreateOrGetAsync(transfer, cancellationToken);
 
             if (!result.WasCreated &&
                 (result.Transfer.RecipientAccountId != transfer.RecipientAccountId ||
                 result.Transfer.Amount != transfer.Amount))
             {       
-                return Result<TransferId>.Fail("Ключ идемпотентности уже использован с другими данными.");
+                return Result<TransferId>.Fail(ErrorType.Conflict, "Ключ идемпотентности уже использован с другими данными.");
             }
 
 

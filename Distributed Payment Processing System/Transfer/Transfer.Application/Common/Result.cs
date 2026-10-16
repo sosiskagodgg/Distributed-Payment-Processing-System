@@ -7,7 +7,8 @@ namespace Transfer.Application.Common
         public T? Value { get; private set; }
         public bool IsSuccess { get; private set; }
         public string? Error { get; private set; }
-        
+        public ErrorType? ErrorType { get; private set; }
+
         public static Result<T> Ok(T value)
         {
             return new Result<T>()
@@ -16,12 +17,13 @@ namespace Transfer.Application.Common
                 IsSuccess = true
             };
         }
-        public static Result<T> Fail(string error)
+        public static Result<T> Fail(ErrorType errorType, string error)
         {
             return new Result<T>()
             {
                 IsSuccess = false,
-                Error = error
+                Error = error,
+                ErrorType = errorType
             };
         }
 
