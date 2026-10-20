@@ -159,8 +159,11 @@ public sealed class Transfer : AggregateRoot<TransferId>
     {
         if (Status is not (TransferStatus.Processing or TransferStatus.FundsReserved))
             throw new DomainException("Завершить перевод с ошибкой можно только во время обработки или после резервирования средств.");
+        if(string.IsNullOrEmpty(reason))
+            throw new DomainException("Текст не может быть пустым");
         if (reason.Length > 500)
             throw new DomainException("Длина текста ошибки не мошет привышать 500 символов");
+
 
 
         SetStatus(TransferStatus.Failed, occurredAt, ValidateReason(reason));
@@ -170,7 +173,10 @@ public sealed class Transfer : AggregateRoot<TransferId>
     {
         if (Status != TransferStatus.Processing)
             throw new DomainException("Отклонить можно только обрабатываемый перевод.");
-
+        if (string.IsNullOrEmpty(reason))
+            throw new DomainException("Текст не может быть пустым");
+        if (reason.Length > 500)
+            throw new DomainException("Длина текста ошибки не мошет привышать 500 символов");
         SetStatus(TransferStatus.Rejected, occurredAt, ValidateReason(reason));
     }
 

@@ -1,7 +1,11 @@
 <Solution>
   <Folder Name="/Transfer/">
+    <Project Path="Transfer/Transfer.Api/Transfer.Api.csproj" />
     <Project Path="Transfer/Transfer.Application/Transfer.Application.csproj" />
     <Project Path="Transfer/Transfer.Domain/Transfer.Domain.csproj" />
     <Project Path="Transfer/Transfer.Infrastructure/Transfer.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/Transfer/Tests/">
+    <Project Path="Transfer.Domain.Tests/Transfer.Domain.Tests.csproj" Id="13e14d42-8292-432b-8bac-e4aaa4cd2eaa" />
   </Folder>
 </Solution>

@@ -15,7 +15,7 @@ public class TransferRepository : ITransferRepository
         _timeProvider = timeProvider;
     }
 
-    public async Task<AddTransferResult> CreateOrGetAsync(Domain.Transfers.Transfer transfer, CancellationToken cancellationToken = default)
+    public async Task<CreateOrGetTransferResult> CreateOrGetAsync(Domain.Transfers.Transfer transfer, CancellationToken cancellationToken = default)
     {
         try
         {
@@ -36,12 +36,12 @@ public class TransferRepository : ITransferRepository
             
             if(existing == null) throw new InfrastructureException("Конфликт идемпотентности, но перевод не найден", ex);
 
-            return new AddTransferResult(existing,false);
+            return new CreateOrGetTransferResult(existing,false);
         } 
 
         
         
-        return new AddTransferResult(transfer, true);
+        return new CreateOrGetTransferResult(transfer, true);
     }
 
     public async Task<bool> AnyAsync(TransferId transferId, CancellationToken cancellationToken = default)
