@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/tests/">
+    <Project Path="tests/Transfer.Application.Tests/Transfer.Application.Tests.csproj" />
+  </Folder>
   <Folder Name="/Transfer/">
     <Project Path="Transfer/Transfer.Api/Transfer.Api.csproj" />
     <Project Path="Transfer/Transfer.Application/Transfer.Application.csproj" />
