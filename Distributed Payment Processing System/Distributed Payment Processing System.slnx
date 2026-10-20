@@ -1,14 +1,13 @@
 <Solution>
   <Folder Name="/tests/">
     <Project Path="tests/Transfer.Application.Tests/Transfer.Application.Tests.csproj" />
+    <Project Path="tests/Transfer.Domain.Tests/Transfer.Domain.Tests.csproj" Id="13e14d42-8292-432b-8bac-e4aaa4cd2eaa" />
+    <Project Path="Transfer.Infrastructure.Tests/Transfer.Infrastructure.Tests.csproj" Id="0482ab5e-0ea9-43c0-8f1d-142ac086c8e3" />
   </Folder>
   <Folder Name="/Transfer/">
     <Project Path="Transfer/Transfer.Api/Transfer.Api.csproj" />
     <Project Path="Transfer/Transfer.Application/Transfer.Application.csproj" />
     <Project Path="Transfer/Transfer.Domain/Transfer.Domain.csproj" />
     <Project Path="Transfer/Transfer.Infrastructure/Transfer.Infrastructure.csproj" />
-  </Folder>
-  <Folder Name="/Transfer/Tests/">
-    <Project Path="Transfer.Domain.Tests/Transfer.Domain.Tests.csproj" Id="13e14d42-8292-432b-8bac-e4aaa4cd2eaa" />
   </Folder>
 </Solution>

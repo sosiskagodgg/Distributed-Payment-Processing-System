@@ -7,7 +7,7 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\Transfer\Transfer.Domain\Transfer.Domain.csproj" />
+		<ProjectReference Include="../../Transfer/Transfer.Domain/Transfer.Domain.csproj" />
 	</ItemGroup>
   <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="6.0.4" />

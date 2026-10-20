@@ -16,6 +16,11 @@ public static class DependencyInjection
         string connectionString)
     {
         if (string.IsNullOrEmpty(connectionString))  throw new InfrastructureException("Строка подключения не может быть пустой");
+
+
+      
+        
+        
         services.AddDbContext<TransferDbContext>(options=>options.UseNpgsql(connectionString));
 
 

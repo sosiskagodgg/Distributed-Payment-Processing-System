@@ -15,7 +15,10 @@ public sealed class Transfer : AggregateRoot<TransferId>
     public DateTimeOffset CreatedAt { get; }
     public DateTimeOffset UpdatedAt { get; private set; }
     public string? FailureReason { get; private set; }
-
+    private Transfer() : base(default)
+    {
+        Amount = null!;
+    }
     private Transfer(
         TransferId transferId,
         AccountId senderAccountId,
