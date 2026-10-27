@@ -10,16 +10,35 @@ namespace Transfer.Application.Transfers.Commands.CreateTransfer
     {
         private readonly ITransferRepository _transferRepository;
         private readonly TimeProvider _timeProvider;
+        private readonly ICurrentUser _correntUser;
+        private readonly IAccountAccessService _accountAccessService;
 
-
-        public CreateTransferHandler(ITransferRepository transferRepository,TimeProvider timeProvider)
+        public CreateTransferHandler(
+            ITransferRepository transferRepository,
+            TimeProvider timeProvider,
+            ICurrentUser correntUser,
+            IAccountAccessService accountAccessService)
         {
             _transferRepository = transferRepository;
             _timeProvider = timeProvider;
+            _correntUser = correntUser;
+            _accountAccessService = accountAccessService;
         }
 
         public async Task<Result<TransferId>> Handle(CreateTransferCommand request, CancellationToken cancellationToken)
         {
+            if(_correntUser.UserId == Guid.Empty)
+            {
+                return Result<TransferId>.Fail(ErrorType.Unauthorized, "Пользователь не авторизован.");
+            }
+            if (!await _accountAccessService.CanAccessAccountAsync(_correntUser.UserId,request.SenderAccountId,cancellationToken))
+            {
+                return Result<TransferId>.Fail(ErrorType.Forbidden, "Невозможно создать перевод с чужого счета.");
+            }
+
+
+
+
             TransferObject transfer;
             try
             {
